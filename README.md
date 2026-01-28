@@ -1,30 +1,20 @@
-# Transcription HTML Frontend
+# Transcription Frontend
 
-Pure HTML/CSS/JavaScript frontend for [Deepgram's Pre-recorded Audio Transcription API](https://developers.deepgram.com/docs/pre-recorded-audio-transcription).
+> **⚠️ This is a frontend submodule - do not use directly**
 
-## Features
+This repository contains the shared frontend for Deepgram transcription starter applications. It is designed to be used as a git submodule within backend starter projects.
 
-- 📁 File upload for audio/video transcription
-- 📝 Real-time transcript display
-- 🎛️ Configurable transcription models
-- 🎨 Built with [Deepgram Design System](https://github.com/deepgram/design-system)
-- 🚀 No framework dependencies - pure vanilla JavaScript
+## Usage
 
-## Prerequisites
+To use this frontend with a complete working application, see:
 
-- Node.js 14.0.0+
-- pnpm 10.0.0+
-- A backend server that implements the Transcription API endpoint
+**Node.js Starter:**
+- [node-transcription](https://github.com/deepgram-starters/node-transcription)
 
-## Quickstart
+**Other Languages:**
 
-```bash
-pnpm install
-pnpm dev
-```
+Browse all available starters at [github.com/deepgram-starters](https://github.com/deepgram-starters)
 
-See the [Node.js Transcription starter](https://github.com/deepgram-starters/node-transcription) for complete backend implementation.
+## About
 
-## License
-
-MIT - See [LICENSE](./LICENSE)
+This frontend is automatically integrated as a submodule in the backend starters listed above. Running this repository standalone will not work as it requires backend API endpoints to function properly.
