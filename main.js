@@ -30,6 +30,12 @@
 const API_ENDPOINT = "/stt/transcribe";
 
 /**
+ * API endpoint for app metadata
+ * Returns app title, description, author, etc.
+ */
+const METADATA_ENDPOINT = "/api/metadata";
+
+/**
  * LocalStorage key for history persistence
  * Change this if you want to use a different storage key
  */
@@ -295,6 +301,53 @@ function updateFormValidation() {
 }
 
 // ============================================================================
+// METADATA FETCHING
+// ============================================================================
+
+/**
+ * Fetches app metadata from the backend and updates the UI
+ * Updates page title and adds repository link to header
+ */
+async function fetchMetadata() {
+  try {
+    const response = await fetch(METADATA_ENDPOINT);
+    if (!response.ok) {
+      console.warn('Failed to fetch metadata:', response.statusText);
+      return;
+    }
+
+    const metadata = await response.json();
+
+    // Update page title
+    if (metadata.title) {
+      document.title = metadata.title;
+    }
+
+    // Add repository link to header if available
+    if (metadata.repository) {
+      const headerNav = document.querySelector('.dg-header__nav');
+      if (headerNav) {
+        const repoLink = document.createElement('a');
+        repoLink.href = metadata.repository;
+        repoLink.className = 'dg-btn dg-btn--ghost dg-btn--sm';
+        repoLink.target = '_blank';
+        repoLink.rel = 'noopener noreferrer';
+
+        const icon = document.createElement('i');
+        icon.className = 'fa-brands fa-github';
+        icon.style.marginRight = '0.25rem';
+
+        repoLink.appendChild(icon);
+        repoLink.appendChild(document.createTextNode('Repository'));
+        headerNav.insertBefore(repoLink, headerNav.firstChild);
+      }
+    }
+  } catch (error) {
+    console.warn('Error fetching metadata:', error);
+  }
+}
+
+// ============================================================================
 // INITIALIZATION & SETUP
 // ============================================================================
 
@@ -337,6 +390,8 @@ function init() {
   renderHistory();
   // Check URL for request_id
   checkUrlForRequestId();
+  // Fetch and display app metadata
+  fetchMetadata();
 }
 
 /**
