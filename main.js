@@ -306,44 +306,45 @@ function updateFormValidation() {
 
 /**
  * Fetches app metadata from the backend and updates the UI
- * Updates page title and adds repository link to header
+ * Updates page title, description, header title, and repository link
  */
 async function fetchMetadata() {
   try {
     const response = await fetch(METADATA_ENDPOINT);
     if (!response.ok) {
-      console.warn('Failed to fetch metadata:', response.statusText);
+      console.warn('Failed to fetch metadata, using defaults');
       return;
     }
 
     const metadata = await response.json();
 
     // Update page title
-    if (metadata.title) {
-      document.title = metadata.title;
+    const pageTitle = document.getElementById('pageTitle');
+    if (metadata.title && pageTitle) {
+      pageTitle.textContent = metadata.title;
     }
 
-    // Add repository link to header if available
-    if (metadata.repository) {
-      const headerNav = document.querySelector('.dg-header__nav');
-      if (headerNav) {
-        const repoLink = document.createElement('a');
-        repoLink.href = metadata.repository;
-        repoLink.className = 'dg-btn dg-btn--ghost dg-btn--sm';
-        repoLink.target = '_blank';
-        repoLink.rel = 'noopener noreferrer';
-
-        const icon = document.createElement('i');
-        icon.className = 'fa-brands fa-github';
-        icon.style.marginRight = '0.25rem';
-
-        repoLink.appendChild(icon);
-        repoLink.appendChild(document.createTextNode('Repository'));
-        headerNav.insertBefore(repoLink, headerNav.firstChild);
-      }
+    // Update page description
+    const pageDescription = document.getElementById('pageDescription');
+    if (metadata.description && pageDescription) {
+      pageDescription.setAttribute('content', metadata.description);
     }
+
+    // Update header title
+    const headerTitle = document.getElementById('headerTitle');
+    if (metadata.title && headerTitle) {
+      headerTitle.textContent = metadata.title;
+    }
+
+    // Update repository link
+    const repoLink = document.getElementById('repoLink');
+    if (metadata.repository && repoLink) {
+      repoLink.href = metadata.repository;
+    }
+
+    console.log('Metadata loaded:', metadata);
   } catch (error) {
-    console.warn('Error fetching metadata:', error);
+    console.warn('Error loading metadata, using defaults:', error);
   }
 }
 
