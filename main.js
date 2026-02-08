@@ -23,19 +23,17 @@
 // CONFIGURATION - Customize these values for your needs
 // ============================================================================
 
-const BACKEND_PORT = 8081;
-
 /**
  * API endpoint for transcription requests
  * Change this if your backend is hosted elsewhere
  */
-const API_ENDPOINT = `http://localhost:${BACKEND_PORT}/stt/transcribe`;
+const API_ENDPOINT = "/api/transcription";
 
 /**
  * API endpoint for app metadata
  * Returns app title, description, author, etc.
  */
-const METADATA_ENDPOINT = `http://localhost:${BACKEND_PORT}/api/metadata`;
+const METADATA_ENDPOINT = "/api/metadata";
 
 /**
  * LocalStorage key for history persistence
