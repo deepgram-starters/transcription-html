@@ -24,16 +24,29 @@
 // ============================================================================
 
 /**
- * API endpoint for transcription requests
- * Change this if your backend is hosted elsewhere
+ * Computes the base path from the current page URL.
+ * Ensures a trailing slash so relative API paths resolve correctly
+ * whether the app is deployed at root (/) or under a subpath (/node-transcription/).
+ *
+ * @returns {string} Base path with trailing slash (e.g., "/" or "/node-transcription/")
  */
-const API_ENDPOINT = "/api/transcription";
+function getBasePath() {
+  let path = window.location.pathname;
+  if (!path.endsWith("/")) path += "/";
+  return path;
+}
+
+/**
+ * API endpoint for transcription requests
+ * Dynamically resolved from base path to support subpath deployments
+ */
+const API_ENDPOINT = getBasePath() + "api/transcription";
 
 /**
  * API endpoint for app metadata
  * Returns app title, description, author, etc.
  */
-const METADATA_ENDPOINT = "/api/metadata";
+const METADATA_ENDPOINT = getBasePath() + "api/metadata";
 
 /**
  * LocalStorage key for history persistence
