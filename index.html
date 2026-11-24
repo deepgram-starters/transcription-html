@@ -91,7 +91,7 @@
        =================================================================== */
 
     /* Left sidebar - Audio sources and controls */
-    .dg-column--sidebar-left {
+    .dg-columns__column--left {
       border-right: 1px solid rgba(255, 255, 255, 0.1);
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       background: var(--dg-almost-black, #050506);
@@ -99,13 +99,13 @@
     }
 
     /* Main content area - Transcription results */
-    .dg-column--main {
+    .dg-columns__column--center {
       background: var(--dg-background, #0b0b0c);
       overflow-y: auto;
     }
 
     /* Right sidebar - History panel */
-    .dg-column--sidebar-right {
+    .dg-columns__column--right {
       border-left: 1px solid rgba(255, 255, 255, 0.1);
       border-top: 1px solid rgba(255, 255, 255, 0.1);
       background: var(--dg-almost-black, #050506);
@@ -113,14 +113,14 @@
     }
 
     /* Responsive adjustments for column borders */
-    @media (min-width: 768px) {
-      .dg-column--sidebar-right {
+    @media (min-width: 1280px) {
+      .dg-columns__column--right {
         border-top: none;
       }
     }
 
     @media (min-width: 1024px) {
-      .dg-column--sidebar-left {
+      .dg-columns__column--left {
         border-bottom: none;
       }
     }
@@ -344,7 +344,7 @@
            LEFT SIDEBAR - Audio sources, model selection, and controls
            ================================================================== -->
 
-      <aside class="dg-column dg-column--sidebar-left dg-column--xl">
+      <aside class="dg-columns__column dg-columns__column--left dg-columns__column--xl">
 
         <!-- AUDIO SOURCE SELECTION
              Cards for selecting sample audio URLs or uploading files
@@ -445,7 +445,7 @@
            Content is dynamically updated by main.js
            ================================================================== -->
 
-      <main class="dg-column dg-column--main" id="mainContent">
+      <main class="dg-columns__column dg-columns__column--center" id="mainContent">
         <div class="empty-state">
           <div class="empty-state-icon dg-text-primary"><i class="fa-solid fa-microphone"></i></div>
           <h2 class="dg-section-heading">Select your audio and options to try out transcription</h2>
@@ -466,7 +466,7 @@
          Managed by history functions in main.js
          ================================================================== -->
 
-    <aside class="dg-column dg-column--sidebar-right dg-column--lg collapsed" id="historySidebar">
+    <aside class="dg-columns__column dg-columns__column--right dg-columns__column--lg collapsed" id="historySidebar">
       <button type="button" id="historySidebarToggle" class="history-sidebar-toggle" aria-label="Toggle history sidebar"
         aria-expanded="false">
         <i class="fa-solid fa-chevron-left"></i>
@@ -494,7 +494,7 @@
     @media (min-width: 768px) and (max-width: 1279px) {
 
       /* Allow toggle button to overflow outside sidebar */
-      .dg-column--sidebar-right {
+      .dg-columns__column--right {
         overflow: visible;
       }
 
@@ -531,7 +531,7 @@
         transition: transform 300ms ease;
       }
 
-      .dg-column--sidebar-right.collapsed .history-sidebar-toggle i {
+      .dg-columns__column--right.collapsed .history-sidebar-toggle i {
         transform: rotate(180deg);
       }
     }
